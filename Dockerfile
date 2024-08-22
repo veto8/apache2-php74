@@ -1,4 +1,5 @@
 FROM debian:latest
+LABEL version="0.1"
 MAINTAINER veto<veto@myridia.com>
 RUN apt-get update && apt-get install -y \
   apache2 \
