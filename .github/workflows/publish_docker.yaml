@@ -1,9 +1,9 @@
 name: Publish Docker image
 on:
   push:
-    branches: ["latest"]
+    branches: ["main"]
     tags:
-      - '*'
+      - 'latest'
 #on:
 #  release:
 #    types: [published]
