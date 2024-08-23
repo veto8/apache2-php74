@@ -43,8 +43,8 @@ RUN apt-get update && apt-get install -y \
   php7.4-pgsql \
   php7.4-soap \
   libapache2-mod-php7.4 \
-  php-pear \
-  composer
+  php-pear 
+
 
 #RUN pear install mail \
 #pear upgrade MAIL Net_SMTP 
@@ -63,6 +63,10 @@ sed -i -e '/short_open_tag =/ s/= .*/= ON/' /etc/php/7.4/cli/php.ini ; \
 sed -i -e '/AllowOverride / s/ .*/ All/' /etc/apache2/apache2.conf ; \
 sed -i -e '/max_execution_time =/ s/= .*/= 1200/' /etc/php/7.4/apache2/php.ini ; \
 echo 'open_basedir = "/"' >> /etc/php/7.4/apache2/php.ini ; 
+
+
+RUN  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin  \
+ln -s /usr/bin/composer.phar /usr/bin/composer 
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
