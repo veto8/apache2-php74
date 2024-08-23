@@ -22,7 +22,9 @@ RUN apt-get update && apt-get install -y \
   sqlite3 \
   unzip \
   p7zip-full \
-  postgresql-client
+  postgresql-client \
+  inetutils-ping  \
+  net-tools
   
 RUN wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
 RUN echo "deb https://packages.sury.org/php/ bookworm main" | tee /etc/apt/sources.list.d/php.list
