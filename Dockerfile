@@ -53,6 +53,16 @@ RUN apt-get update && apt-get install -y \
 #RUN pear install mail \
 #pear upgrade MAIL Net_SMTP 
 
+# 1. Add Microsoft repository for ODBC driver
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+    curl https://packages.microsoft.com/config/debian/12/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
+# 2. Install ODBC driver and PHP SQLSRV extension
+RUN apt-get update && \
+    ACCEPT_EULA=Y apt-get install -y msodbcsql17 unixodbc-dev && \
+    apt-get install -y php7.4-sqlsrv
+
+    
 
 RUN echo "<?php phpinfo() ?>" > /var/www/html/index.php ; \
 mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor ; \
