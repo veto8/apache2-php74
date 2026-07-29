@@ -49,16 +49,7 @@ RUN apt-get update && apt-get install -y \
   libapache2-mod-php7.4 \
   php-pear
 
-RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && \
-    echo "deb [signed-by=/usr/share/keyrings/microsoft.gpg arch=amd64,armhf,arm64] https://packages.microsoft.com/debian/11/prod bullseye main" > /etc/apt/sources.list.d/mssql-release.list
 
-RUN apt-get update && \
-    ACCEPT_EULA=Y apt-get install -y msodbcsql17 unixodbc-dev
-
-RUN pecl install sqlsrv pdo_sqlsrv && \
-    echo "extension=sqlsrv.so" > /etc/php/7.4/mods-available/sqlsrv.ini && \
-    echo "extension=pdo_sqlsrv.so" > /etc/php/7.4/mods-available/pdo_sqlsrv.ini && \
-    phpenmod sqlsrv pdo_sqlsrv
 
 RUN echo "<?php phpinfo() ?>" > /var/www/html/index.php ; \
 mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor ; \
