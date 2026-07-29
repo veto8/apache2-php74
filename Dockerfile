@@ -47,8 +47,9 @@ RUN apt-get update && apt-get install -y \
   php7.4-pgsql \
   php7.4-soap \
   libapache2-mod-php7.4 \
-  php-pear
-
+   php-pear \
+  freetds-bin \
+  freetds-common
 
 
 RUN echo "<?php phpinfo() ?>" > /var/www/html/index.php ; \
